@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/blasterA.glb" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 2.0
+
+[sub_resource type="BoxShape" id=2]
+
+[node name="Player" type="KinematicBody"]
+script = ExtResource( 1 )
+GRAVITY = 28.0
+SPEED = 10.0
+JUMP = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65817, 0 )
+
+[node name="blasterA" parent="Camera" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.3, -0.3, -0.886 )
+
+[node name="muzzle" type="Spatial" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.471426, -0.179475, -1.23638 )
+
+[node name="Area" type="Area" parent="Camera"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.648246, -0.822007 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Camera/Area"]
+shape = SubResource( 2 )
+
+[node name="hand" type="Spatial" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.848219, 0.246779, -3.73905 )
+
+[connection signal="body_entered" from="Camera/Area" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="Camera/Area" to="." method="_on_Area_body_exited"]

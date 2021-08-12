@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://models/treePine_large.glb" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 4.0
+
+[node name="Tree" type="Spatial"]
+
+[node name="Tree" type="RigidBody" parent="."]
+mode = 1
+
+[node name="treePine_large" parent="Tree" instance=ExtResource( 1 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -29.9977, 0, 9.93424 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Tree"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.5, 0 )
+shape = SubResource( 1 )
